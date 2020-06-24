@@ -1,26 +1,64 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import io from "socket.io-client";
+import "./App.css";
+import { Board } from "./comps/board";
+import { Dice } from "./comps/dice";
+import useGlobal from "./store";
+import {
+  playersStates,
+  homes,
+  places,
+  playersColors,
+  startIndexes,
+} from "./constants";
+
+const socket = io("http://localhost:8002");
+
+socket.on("connect", () => {
+  socket.emit("my other event", { fucking: "data" });
+});
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Board />
+      <Dice />
+      <GitiArrangement />
     </div>
   );
 }
 
 export default App;
+
+function GitiArrangement() {
+  const Gitis = {};
+  const [numberOfPlayers, setGitis] = useGlobal(
+    (s) => s.numberOfPlayers,
+    (a) => a.setGitis
+  );
+
+  for (let playerIndex = 0; playerIndex < numberOfPlayers; playerIndex++) {
+    let playerState = playersStates[playerIndex];
+    for (let gitiIdx = 0; gitiIdx < playerState.length; gitiIdx++) {
+      let playerGiti = playerState[gitiIdx];
+      let position = [0, 0];
+      if (playerGiti[0] === -1) {
+        // Player is at home
+        position = homes[playerIndex][gitiIdx];
+      } else if (playerGiti[0] > -1) {
+        position = places[playerIndex][gitiIdx];
+      }
+      const s = {
+        id: playerIndex + "-" + gitiIdx,
+        position: { X: position[0], Y: position[1] },
+        playerColor: playersColors[playerIndex],
+        placeIndex: startIndexes[playerIndex],
+        moved: 0,
+        playerIndex,
+      };
+      Gitis[s.id] = s;
+    }
+  }
+  setGitis(Gitis);
+  return null;
+}

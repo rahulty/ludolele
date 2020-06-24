@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+#dice {
+  border-radius: 8px;
+  border: 1px solid black;
+  height: 50px;
+  width: 50px;
+  font-size: 42px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
