@@ -81,39 +81,65 @@ export const places = [
   [47.5, 216.4],
   [22.1, 215.8],
   [22.1, 192],
-  [22.1, 167.2], //52
+  [22.1, 167.2], //51
 
-  //GreenHomeGoing
+  //GreenOutGoing
   [47.5, 192],
   [71.5, 192],
   [95.5, 192],
   [119.5, 192],
   [143.4, 192],
-  [169.4, 191.5], //58
+  [169.4, 191.5], //57
 
-  //BlueHomeGoing
-  [335.5, 192],
-  [311.5, 191.5],
-  [287.5, 192],
-  [263.5, 192],
-  [238.8, 192],
-  [211, 192], //64
-
-  //RedHomeGoing
-  [191.1, 47.5],
-  [191.1, 71.5],
-  [191.1, 95.5],
-  [191.1, 119.5],
-  [191.1, 143.8],
-  [191.1, 169.4], //70
-
-  //YelloHomeGoing
+  //YelloOutGoing
   [191.1, 335.5],
   [191.1, 311.5],
   [191.1, 287.5],
   [191.1, 263.5],
   [191.1, 240.1],
-  [191.1, 212.3], //76
+  [191.1, 212.3], //63
+
+  //BlueOutGoing
+  [335.5, 192],
+  [311.5, 191.5],
+  [287.5, 192],
+  [263.5, 192],
+  [238.8, 192],
+  [211, 192], //69
+
+  //RedOutGoing
+  [191.1, 47.5],
+  [191.1, 71.5],
+  [191.1, 95.5],
+  [191.1, 119.5],
+  [191.1, 143.8],
+  [191.1, 169.4], //75
+
+  //GreenHome
+  [59.5, 85.0],
+  [83.5, 59.5],
+  [107.5, 85.0],
+  [83.5, 107.5], //79
+
+  //Yellow
+  [275.5, 83.5],
+  [299.5, 60.8],
+  [322.5, 83.5],
+  [299.5, 107.5], //83
+
+  //Blue
+  [275.5, 299.5],
+  [299.5, 275.5],
+  [323.5, 299.5],
+  [299.5, 325.1], //87
+
+  //Red
+  [59.5, 300.3],
+  [83.5, 275.5],
+  [106.2, 299.5],
+  [82.9, 323.5],
+
+  //91
 ];
 
 export const playersStates = [
@@ -149,3 +175,15 @@ export const playersStates = [
 export const playersColors = ["green", "blue", "red", "yellow"];
 export const startIndexes = [0, 26, 13, 39];
 export const diceNumbersThatOpen = [1, 6];
+export const All = [
+  { color: "green", startIndex: 0, outIndex: 57, turnIndex: 50, homeIndex: 76 },
+  {
+    color: "yellow",
+    startIndex: 26,
+    outIndex: 63,
+    turnIndex: 11,
+    homeIndex: 80,
+  },
+  { color: "blue", startIndex: 13, outIndex: 69, turnIndex: 24, homeIndex: 84 },
+  { color: "red", startIndex: 39, outIndex: 75, turnIndex: 37, homeIndex: 88 },
+];
