@@ -4,7 +4,7 @@ import { places } from "../constants";
 
 export function Giti({ id }) {
   const [g, moveGiti] = useGlobal(
-    (s) => s.gitis[id],
+    (s) => s.gameState.gitis[id],
     (a) => a.moveGiti
   );
   const { positionIndex, selected, color } = g;

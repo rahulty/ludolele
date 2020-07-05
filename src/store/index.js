@@ -9,18 +9,18 @@ const me = { id: rnd, color: null };
 // localStorage.setItem("me", me);
 const initialState = {
   me,
-  players: { [me.id]: me },
-  roomId: null,
-  isStarted: false,
-  turnId: null,
   gameState: {
+    players: { [me.id]: me },
+    roomId: null,
+    isStarted: false,
+    turnId: null,
     dice: 0,
     isRolled: false,
     pitiCount: 0,
     canRollDice: true,
     moves: [],
+    gitis: {},
   },
-  gitis: {},
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

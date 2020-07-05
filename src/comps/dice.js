@@ -1,6 +1,5 @@
 import React from "react";
 import useGlobal from "../store";
-import { getRandomInteger } from "../utils";
 
 export function Dice() {
   const [dice, rollDice] = useGlobal(
@@ -8,7 +7,7 @@ export function Dice() {
     (a) => a.rollDice
   );
   function onDiceClick() {
-    rollDice(getRandomInteger(1, 6));
+    rollDice();
   }
 
   return (

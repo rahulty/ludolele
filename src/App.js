@@ -4,14 +4,7 @@ import "./App.css";
 import { Board } from "./comps/board";
 import { Dice } from "./comps/dice";
 import useGlobal from "./store";
-import {
-  playersStates,
-  homes,
-  places,
-  playersColors,
-  startIndexes,
-  All,
-} from "./constants";
+import { All } from "./constants";
 import { socket } from "./constants/socket";
 
 function App() {
@@ -33,7 +26,7 @@ function Main({ match: { params } }) {
   );
   useEffect(() => {
     socket.on("anyListen", actions.anyListen);
-    actions.setRoom(params.id);
+    actions.setGetSendRoomInfo(params.id);
   }, []);
   return (
     <>
@@ -48,7 +41,7 @@ function Main({ match: { params } }) {
 
 function InitializeGiti() {
   const [players, setGitis] = useGlobal(
-    (s) => s.players,
+    (s) => s.gameState.players,
     (a) => a.setGitis
   );
 
@@ -83,18 +76,18 @@ function InitializeGiti() {
 
 function ChooseColor() {
   const colors = ["green", "yellow", "blue", "red"];
-  const [players] = useGlobal((s) => s.players);
+  const [players] = useGlobal((s) => s.gameState.players);
   const ref = useRef();
-  const [myColor, setMe] = useGlobal(
+  const [myColor, setSendMe] = useGlobal(
     (s) => s.me.color,
-    (a) => a.setMe
+    (a) => a.setSendMe
   );
-  function onClick() {
+  function onSelectClick() {
     const {
       color: { value: color },
       name: { value: name },
     } = ref.current.children;
-    setMe({ color, name });
+    setSendMe({ color, name });
   }
 
   return (
@@ -111,22 +104,23 @@ function ChooseColor() {
             return <option value={c}>{c}</option>;
           })}
         </select>
-        <button onClick={onClick}>Select</button>
+        <button onClick={onSelectClick}>Select</button>
       </section>
     )
   );
 }
 function Players() {
-  const [players] = useGlobal((s) => s.players);
+  const [players] = useGlobal((s) => s.gameState.players);
   const [me] = useGlobal((s) => s.me);
   const [isStarted, startGame] = useGlobal(
-    (s) => s.isStarted,
+    (s) => s.gameState.isStarted,
     (a) => a.startGame
   );
-  const Ps = useRef([]);
+  const [Ps, setPs] = useState([]);
   let [count, setCount] = useState(0);
   useEffect(() => {
-    Ps.current = [];
+    let ps = [];
+    let co = 0;
     for (let p in players) {
       const { id, name, color } = players[p];
       const n =
@@ -135,17 +129,19 @@ function Players() {
         ) : (
           name && name + ":" + color
         );
-      setCount(color ? count + 1 : count);
-      Ps.current.push(<li>{n}</li>);
+      ps.push(<li>{n}</li>);
+      co = color ? co + 1 : co;
     }
-  }, [players]);
+    setCount(co);
+    setPs(ps);
+  }, [players, me.id]);
 
   function onClickStart() {
     startGame();
   }
   return (
     <section>
-      <ol>{Ps.current}</ol>
+      <ol>{Ps}</ol>
       {count > 1 && !isStarted && (
         <button onClick={onClickStart}>Start Game</button>
       )}

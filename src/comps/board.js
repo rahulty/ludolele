@@ -24,7 +24,7 @@ export function Board() {
 }
 
 function Gitis() {
-  const [gitis] = useGlobal((s) => s.gitis);
+  const [gitis] = useGlobal((s) => s.gameState.gitis);
   return (
     <g id="players">
       {Object.keys(gitis).map((gi) => {
