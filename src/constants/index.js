@@ -176,14 +176,20 @@ export const playersColors = ["green", "blue", "red", "yellow"];
 export const startIndexes = [0, 26, 13, 39];
 export const diceNumbersThatOpen = [1, 6];
 export const All = [
-  { color: "green", startIndex: 0, outIndex: 57, turnIndex: 50, homeIndex: 76 },
+  { color: "green", startIndex: 0, outIndex: 56, turnIndex: 50, homeIndex: 76 },
   {
     color: "yellow",
-    startIndex: 26,
-    outIndex: 63,
+    startIndex: 13,
+    outIndex: 62,
     turnIndex: 11,
     homeIndex: 80,
   },
-  { color: "blue", startIndex: 13, outIndex: 69, turnIndex: 24, homeIndex: 84 },
-  { color: "red", startIndex: 39, outIndex: 75, turnIndex: 37, homeIndex: 88 },
+  {
+    color: "blue",
+    startIndex: 26,
+    outIndex: 68,
+    turnIndex: 24,
+    homeIndex: 84,
+  },
+  { color: "red", startIndex: 39, outIndex: 74, turnIndex: 37, homeIndex: 88 },
 ];

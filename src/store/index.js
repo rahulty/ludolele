@@ -9,15 +9,14 @@ const me = { id: rnd, color: null };
 // localStorage.setItem("me", me);
 const initialState = {
   me,
+  roomId: null,
+  players: [me],
   gameState: {
-    players: { [me.id]: me },
-    roomId: null,
     isStarted: false,
     turnId: null,
     dice: 0,
-    isRolled: false,
     pitiCount: 0,
-    canRollDice: true,
+    next: "rollDice",
     moves: [],
     gitis: {},
   },

@@ -1,20 +1,37 @@
-import { setMoveableGitis } from "./moveableGiti";
+import { getMoveableGitis, changeTurn } from "./moveableGiti";
 import { sendToAny } from "./common";
 import { getRandomInteger } from "../utils";
+import { diceNumbersThatOpen } from "../constants";
 
 export const rollDice = (store) => {
   const {
-    gameState: { isStarted, turnId },
+    gameState: { isStarted, turnId, next, moves, gitis },
     gameState,
+    players,
     me,
   } = store.state;
-  if (!isStarted || turnId !== me.id) {
+  if (!isStarted || turnId !== me.id || next !== "rollDice") {
     return;
   }
   const dice = getRandomInteger(1, 6);
   gameState.dice = dice;
-  gameState.moves.unshift(dice);
-  setMoveableGitis(store);
+  if (gameState.moves.length >= 3) {
+    gameState.moves = [];
+  }
+  gameState.moves.push(dice);
+  if (!diceNumbersThatOpen.includes(dice)) {
+    Object.assign(gameState, { next: "moveGiti" });
+  }
+  const movableGitis = getMoveableGitis(gitis, turnId, me, moves[0]);
+  Object.assign(gameState.gitis, movableGitis);
+  if (!Object.keys(movableGitis).length) {
+    // change turn if no giti movable
+    Object.assign(gameState, {
+      turnId: changeTurn(players, turnId),
+      next: "rollDice",
+      moves: [],
+    });
+  }
   sendToAny(store.state, "rollDice", gameState);
   store.setState({ gameState });
 };
@@ -23,6 +40,9 @@ export const listener = ({ state, setState }, { payload: gameState }) => {
   Object.assign(state.gameState, {
     dice: gameState.dice,
     gitis: gameState.gitis,
+    turnId: gameState.turnId,
+    next: gameState.next,
+    moves: gameState.moves,
   });
   setState({ gameState: state.gameState });
 };

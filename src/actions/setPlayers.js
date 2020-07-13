@@ -1,19 +1,15 @@
 import { sendToAny } from "./common";
+import { sortPlayerByColor } from "./moveableGiti";
 
 export function listener({ state, setState }, { payload }) {
   const { me } = payload;
-  state.gameState.players = {
-    ...state.gameState.players,
-    [me.id]: me,
-  };
-  setState({ gameState: state.gameState });
+  state.players = sortPlayerByColor([...state.players, me]);
+
+  setState({ players: state.players });
 }
 export const setSendMe = ({ state, setState }, { color, name }) => {
   Object.assign(state.me, { color, name });
-  state.gameState.players = {
-    ...state.gameState.players,
-    [state.me.id]: state.me,
-  };
+  state.players = sortPlayerByColor([...state.players, state.me]);
   sendToAny(state, "setPlayer", state);
-  setState({ me: state.me, gameState: state.gameState });
+  setState({ me: state.me, players: state.players });
 };

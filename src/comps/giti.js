@@ -7,11 +7,10 @@ export function Giti({ id }) {
     (s) => s.gameState.gitis[id],
     (a) => a.moveGiti
   );
-  const { positionIndex, selected, color } = g;
+  const { positionIndex, canMoveTo, color } = g;
   function onGitiClick() {
     moveGiti(id);
   }
-  console.log(id);
   return (
     <circle
       cx={places[positionIndex][0]}
@@ -19,7 +18,7 @@ export function Giti({ id }) {
       stroke="black"
       r="10px"
       fill={color}
-      strokeDasharray={selected ? 2 : 0}
+      strokeDasharray={canMoveTo > -1 ? 2 : 0}
       onClick={onGitiClick}
     >
       {g.id}

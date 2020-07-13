@@ -11,9 +11,6 @@ export const setPlayerInfo = ({ state, setState }, { payload }) => {
   if (!payload.color) {
     return;
   }
-  state.gameState.players = {
-    ...state.gameState.players,
-    [payload.id]: payload,
-  };
-  setState({ gameState: state.gameState });
+  state.players = [...state.players, payload];
+  setState({ players: state.players });
 };

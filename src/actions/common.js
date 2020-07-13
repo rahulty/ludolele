@@ -4,11 +4,19 @@
 import { socket } from "../constants/socket";
 
 export function sendToAny({ roomId, me }, action, data) {
-  console.log("Send---->>>>>>>>", action, data, { roomId, me });
   socket.emit("any", {
     room: "room" + roomId,
     action,
     payload: data,
     sentBy: me?.id,
   });
+}
+export function getIndex(arr, index) {
+  if (index < 0) {
+    return arr.length + index;
+  }
+  if (index >= arr.length) {
+    return index % arr.length;
+  }
+  return index;
 }
