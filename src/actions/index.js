@@ -2,7 +2,7 @@ import { listener as rollDiceListener, rollDice } from "./rollDice";
 import { listener as setPlayerListener, setSendMe } from "./setPlayers";
 import { sendPlayerInfo, setPlayerInfo, setGetSendRoomInfo } from "./room";
 import { moveGiti, setGitis, listenMoveGiti } from "./giti";
-import { sendStartGame, listenStartGame } from "./game";
+import { sendStartGame, listenStartGame } from "./startGame";
 
 const ActionsListenersMap = {
   joinRoom: {

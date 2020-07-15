@@ -43,6 +43,8 @@ function getNewPositionIndex({ giti, move }) {
     newPI = -1;
   } else if (moved + move > 50) {
     newPI = move - (turnIndex - positionIndex) + outIndex - 5;
+  } else if (turnIndex !== 50 && newPI > 51) {
+    newPI = move - 1;
   }
   // else if (outIndex > newPI && newPI > turnIndex) {
   //   return move - (turnIndex - positionIndex) + outIndex - 5;

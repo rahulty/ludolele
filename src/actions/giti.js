@@ -29,7 +29,6 @@ export const moveGiti = (store, gitiId) => {
       gameState.gitis,
       getMoveableGitis(gitis, turnId, me, moves[0])
     );
-    // gameState.gitis = getMoveableGitis(gitis, turnId, me, moves[0]);
     gameState.next = "moveGiti";
   } else {
     gameState.next = "rollDice";
