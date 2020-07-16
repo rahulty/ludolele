@@ -8,6 +8,12 @@ image: node:10.15.3
 pipelines:
   default:
     - step:
+        name: Build
+        script:
+          - git archive --format=tar.gz master -o my-ludo.tar.gz
+        artifacts:
+          - my-ludo.tar.gz
+    - step:
         name: Deploy to production
         caches:
           - node
@@ -15,6 +21,5 @@ pipelines:
           - pipe: atlassian/heroku-deploy:1.1.4
             variables:
               HEROKU_API_KEY: $HEROKU_API_KEY
-              HEROKU_APP_NAME: 'my-ludo'
-              ZIP_FILE: 'my-ludo.tar.gz'
-
+              HEROKU_APP_NAME: "my-ludo"
+              ZIP_FILE: "my-ludo.tar.gz"
