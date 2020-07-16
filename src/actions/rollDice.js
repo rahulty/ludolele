@@ -5,7 +5,7 @@ import { diceNumbersThatOpen } from "../constants";
 
 export const rollDice = (store) => {
   const {
-    gameState: { isStarted, turnId, next, moves, gitis },
+    gameState: { isStarted, turnId, next, gitis },
     gameState,
     players,
     me,
@@ -22,7 +22,7 @@ export const rollDice = (store) => {
   if (!diceNumbersThatOpen.includes(dice)) {
     Object.assign(gameState, { next: "moveGiti" });
   }
-  const movableGitis = getMoveableGitis(gitis, turnId, me, moves[0]);
+  const movableGitis = getMoveableGitis(gitis, turnId, me, gameState.moves[0]);
   Object.assign(gameState.gitis, movableGitis);
   if (!Object.keys(movableGitis).length) {
     // change turn if no giti movable

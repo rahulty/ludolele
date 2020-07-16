@@ -24,13 +24,13 @@ export default App;
 
 function Main({ match: { params } }) {
   const [, actions] = useGlobal(
-    (s) => false,
+    () => false,
     (a) => a
   );
   useEffect(() => {
     socket.on("anyListen", actions.anyListen);
     actions.setGetSendRoomInfo(params.id);
-  }, []);
+  }, [actions, params.id]);
   return (
     <>
       <MyForm />
