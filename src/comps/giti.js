@@ -7,6 +7,7 @@ export function Giti({ id }) {
     (s) => s.gameState.gitis[id],
     (a) => a.moveGiti
   );
+  useGlobal((s) => s.gameState.gitis[id].canMoveTo);
   const { positionIndex, canMoveTo, color } = g;
   function onGitiClick() {
     moveGiti(id);
