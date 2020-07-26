@@ -91,55 +91,52 @@ export const places = [
   [143.4, 192],
   [169.4, 191.5], //57
 
-  //YelloOutGoing
-  [191.1, 335.5],
-  [191.1, 311.5],
-  [191.1, 287.5],
-  [191.1, 263.5],
-  [191.1, 240.1],
-  [191.1, 212.3], //63
+  //yellowOutGoing
+  [191.1, 47.5],
+  [191.1, 71.5],
+  [191.1, 95.5],
+  [191.1, 119.5],
+  [191.1, 143.8],
+  [191.1, 169.4],
 
-  //BlueOutGoing
+  //blueOutGOing
   [335.5, 192],
   [311.5, 191.5],
   [287.5, 192],
   [263.5, 192],
   [238.8, 192],
   [211, 192], //69
+  // redOutGoing
+  [191.1, 335.5],
+  [191.1, 311.5],
+  [191.1, 287.5],
+  [191.1, 263.5],
+  [191.1, 240.1],
+  [191.1, 212.3], //75
 
-  //RedOutGoing
-  [191.1, 47.5],
-  [191.1, 71.5],
-  [191.1, 95.5],
-  [191.1, 119.5],
-  [191.1, 143.8],
-  [191.1, 169.4], //75
-
-  //GreenHome
+  //greenHome
   [59.5, 85.0],
   [83.5, 59.5],
   [107.5, 85.0],
   [83.5, 107.5], //79
 
-  //Yellow
+  //yellowHome
   [275.5, 83.5],
   [299.5, 60.8],
   [322.5, 83.5],
   [299.5, 107.5], //83
 
-  //Blue
+  //blueHome
   [275.5, 299.5],
   [299.5, 275.5],
   [323.5, 299.5],
   [299.5, 325.1], //87
 
-  //Red
+  //redHome
   [59.5, 300.3],
   [83.5, 275.5],
   [106.2, 299.5],
   [82.9, 323.5],
-
-  //91
 ];
 
 export const playersStates = [
@@ -176,20 +173,36 @@ export const playersColors = ["green", "blue", "red", "yellow"];
 export const startIndexes = [0, 26, 13, 39];
 export const diceNumbersThatOpen = [1, 6];
 export const All = [
-  { color: "green", startIndex: 0, outIndex: 56, turnIndex: 50, homeIndex: 76 },
+  {
+    color: "green",
+    startIndex: 0,
+    outIndex: 57,
+    turnIndex: 50,
+    homeIndex: 76,
+    turnInIndex: 52,
+  },
   {
     color: "yellow",
     startIndex: 13,
-    outIndex: 62,
+    outIndex: 63,
     turnIndex: 11,
     homeIndex: 80,
+    turnInIndex: 58,
   },
   {
     color: "blue",
     startIndex: 26,
-    outIndex: 68,
+    outIndex: 69,
     turnIndex: 24,
     homeIndex: 84,
+    turnInIndex: 64,
   },
-  { color: "red", startIndex: 39, outIndex: 74, turnIndex: 37, homeIndex: 88 },
+  {
+    color: "red",
+    startIndex: 39,
+    outIndex: 75,
+    turnIndex: 37,
+    homeIndex: 88,
+    turnInIndex: 70,
+  },
 ];

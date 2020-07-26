@@ -6,8 +6,10 @@ export function Dice() {
     (s) => s.gameState.dice,
     (a) => a.rollDice
   );
-  const [next] = useGlobal((s) => s.gameState.next);
   const [moves] = useGlobal((s) => s.gameState.moves);
+  const [turnId] = useGlobal((s) => s.gameState.turnId);
+  const [players] = useGlobal((s) => s.players);
+  const player = players.find((p) => p.id === turnId);
   function onDiceClick() {
     rollDice();
   }
@@ -17,7 +19,7 @@ export function Dice() {
       <div
         unselectable="on"
         id="dice"
-        className={next === "rollDice" ? "rollDice" : ""}
+        style={{ backgroundColor: player?.color }}
         onClick={onDiceClick}
       >
         {dice}

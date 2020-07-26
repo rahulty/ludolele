@@ -50,8 +50,6 @@ body {
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-}
-.rollDice {
-  background-color: yellow;
-  color: red;
+  text-shadow: 1px 1px #282c34;
+  color: #b23f73;
 }

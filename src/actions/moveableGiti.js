@@ -33,22 +33,23 @@ export const getMoveableGitis = (gitis, turnId, me, move) => {
 
 function getNewPositionIndex({ giti, move }) {
   const { positionIndex, moved } = giti;
-  const { turnIndex, outIndex, homeIndex, startIndex } = All.find(
+  const { turnIndex, outIndex, homeIndex, startIndex, turnInIndex } = All.find(
     (a) => a.color === giti.color
   );
   let newPI = positionIndex + move;
-  if (positionIndex >= homeIndex) {
-    newPI = diceNumbersThatOpen.includes(move) ? startIndex : -1;
-  } else if (newPI > outIndex) {
+  if (positionIndex === outIndex) {
     newPI = -1;
-  } else if (moved + move > 50) {
-    newPI = move - (turnIndex - positionIndex) + outIndex - 5;
-  } else if (turnIndex !== 50 && newPI > 51) {
-    newPI = move - 1;
+  } else if (positionIndex >= homeIndex) {
+    newPI = diceNumbersThatOpen.includes(move) ? startIndex : -1;
+  } else if (moved + move > 50 && positionIndex < turnInIndex) {
+    newPI = turnInIndex + move - 1 - (turnIndex - positionIndex);
+  } else if (turnIndex !== 50 && newPI > 51 && positionIndex < turnInIndex) {
+    const movesBefore51 = 51 - positionIndex;
+    newPI = move - movesBefore51 - 1;
   }
-  // else if (outIndex > newPI && newPI > turnIndex) {
-  //   return move - (turnIndex - positionIndex) + outIndex - 5;
-  // }
+  if (newPI > outIndex) {
+    newPI = -1;
+  }
 
   return newPI;
 }
