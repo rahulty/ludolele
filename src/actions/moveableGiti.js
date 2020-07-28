@@ -1,4 +1,4 @@
-import { diceNumbersThatOpen, All } from "../constants";
+import { diceNumbersThatOpen, All, safeIndexes } from "../constants";
 import { getIndex } from "./common";
 
 export const getMoveableGitis = (gitis, turnId, me, move) => {
@@ -54,22 +54,38 @@ function getNewPositionIndex({ giti, move }) {
   return newPI;
 }
 
-export function pitiGiti(gitis, posIndex) {
-  const gitisAtPos = { length: 0 };
+export function getPitiGitis(gitis, movingGiti) {
+  let pitiGitis = [];
+  const { positionIndex } = movingGiti;
+  if (safeIndexes.includes(positionIndex)) {
+    return pitiGitis;
+  }
+  const gitisAtPos = getGitisOnPIGroupByColor(gitis, positionIndex);
+  const gitisAtPosVals = Object.values(gitisAtPos);
+  if (gitisAtPosVals.length > 1) {
+    if (gitisAtPosVals[0].length === gitisAtPosVals[1].length) {
+      pitiGitis =
+        gitisAtPos[
+          Object.keys(gitisAtPos).find((e) => e !== movingGiti.color)
+        ] || [];
+    }
+  }
+  return pitiGitis;
+}
+
+function getGitisOnPIGroupByColor(gitis, positionIndex) {
+  const gitisAtPos = {};
   for (let k in gitis) {
-    const { color, positionIndex } = gitis[k];
-    if (positionIndex === posIndex) {
+    const { color, positionIndex: currGitiPI } = gitis[k];
+    if (currGitiPI === positionIndex) {
       if (gitisAtPos[color]) {
         gitisAtPos[color].push(gitis[k]);
       } else {
         gitisAtPos[color] = [gitis[k]];
       }
-      gitisAtPos.length += 1;
     }
   }
-  if (gitisAtPos.length > 1) {
-  }
-  return 0;
+  return gitisAtPos;
 }
 
 export function sortPlayerByColor(players) {

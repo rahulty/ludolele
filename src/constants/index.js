@@ -172,6 +172,32 @@ export const playersStates = [
 export const playersColors = ["green", "blue", "red", "yellow"];
 export const startIndexes = [0, 26, 13, 39];
 export const diceNumbersThatOpen = [1, 6];
+export const safeIndexes = [
+  0,
+  13,
+  26,
+  39,
+  47,
+  8,
+  21,
+  34,
+  76,
+  77,
+  78,
+  79,
+  80,
+  81,
+  82,
+  83,
+  84,
+  85,
+  86,
+  87,
+  88,
+  89,
+  90,
+  91,
+];
 export const All = [
   {
     color: "green",

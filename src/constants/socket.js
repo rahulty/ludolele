@@ -5,3 +5,6 @@ export const socket = io(`https://ludo-service.herokuapp.com/`);
 socket.on("connect", () => {
   console.log("connected");
 });
+socket.on("disconnect", () => {
+  console.log("disconnected");
+});

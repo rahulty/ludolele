@@ -26,7 +26,7 @@ export function InitializeGiti() {
           id: colorIndex + "-" + gitiIndex,
           color,
           positionIndex: homeIndex + gitiIndex,
-          moved: 0,
+          moved: -1,
           canMoveTo: -1,
         };
       }
