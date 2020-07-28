@@ -17,7 +17,7 @@ export function Giti({ id }) {
       cx={places[positionIndex][0]}
       cy={places[positionIndex][1]}
       stroke="black"
-      r="10px"
+      r={canMoveTo > -1 ? "12px" : "9px"}
       fill={color}
       strokeDasharray={canMoveTo > -1 ? 2 : 0}
       onClick={onGitiClick}
