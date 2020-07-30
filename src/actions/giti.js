@@ -30,7 +30,8 @@ export const moveGiti = (store, gitiId) => {
     });
     if (pitiGitis.length) {
       gitis[gitiId].isPitiGiti = true;
-    } else if (gitis[gitiId].moved === -1) {
+    }
+    if (gitis[gitiId].moved === -1) {
       gitis[gitiId].moved = 0;
     } else {
       gitis[gitiId].moved = gitis[gitiId].moved + moveBy;
@@ -39,6 +40,7 @@ export const moveGiti = (store, gitiId) => {
       gitis[gk] = { ...gitis[gk], canMoveTo: -1 };
     }
   }
+  console.log("------>>>>>>", gitis[gitiId]);
   let shouldChangeTurn = false;
   if (moves.length) {
     const moveableGitis = getMoveableGitis(gitis, turnId, me, moves[0]);
