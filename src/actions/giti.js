@@ -28,8 +28,12 @@ export const moveGiti = (store, gitiId) => {
         All.find((a) => a.color === giti.color).homeIndex + Number(giti.id[2]);
       giti.moved = -1;
     });
-    if (pitiGitis.length) {
-      gitis[gitiId].isPitiGiti = true;
+    if (
+      pitiGitis.length ||
+      All.find((a) => a.color === gitis[gitiId].color).outIndex ===
+        gitis[gitiId].positionIndex
+    ) {
+      gameState.pitiCount = 1;
     }
     if (gitis[gitiId].moved === -1) {
       gitis[gitiId].moved = 0;
@@ -40,7 +44,6 @@ export const moveGiti = (store, gitiId) => {
       gitis[gk] = { ...gitis[gk], canMoveTo: -1 };
     }
   }
-  console.log("------>>>>>>", gitis[gitiId]);
   let shouldChangeTurn = false;
   if (moves.length) {
     const moveableGitis = getMoveableGitis(gitis, turnId, me, moves[0]);
@@ -53,12 +56,13 @@ export const moveGiti = (store, gitiId) => {
   } else {
     shouldChangeTurn = true;
   }
-  if (gitis[gitiId].isPitiGiti) {
-    delete gitis[gitiId].isPitiGiti;
+  if (shouldChangeTurn) {
     gameState.next = "rollDice";
-  } else if (shouldChangeTurn) {
-    gameState.next = "rollDice";
-    gameState.turnId = changeTurn(players, turnId);
+    if (gameState.pitiCount > 0) {
+      gameState.pitiCount = 0;
+    } else {
+      gameState.turnId = changeTurn(players, turnId);
+    }
   }
   store.setState({ gameState });
   sendToAny(store.state, "moveGiti", gameState);

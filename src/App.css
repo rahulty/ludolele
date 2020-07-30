@@ -52,4 +52,10 @@ body {
   cursor: pointer;
   text-shadow: 1px 1px #282c34;
   color: #b23f73;
+
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }

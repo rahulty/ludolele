@@ -28,15 +28,8 @@ function Gitis() {
   return (
     <g id="players">
       {Object.keys(gitis).map((gi) => {
-        const { playerColor, position, id } = gitis[gi];
-        return (
-          <Giti
-            key={id}
-            id={id}
-            playerColor={playerColor}
-            position={position}
-          />
-        );
+        const { id } = gitis[gi];
+        return <Giti key={id} id={id} />;
       })}
     </g>
   );
@@ -233,11 +226,35 @@ function Rectangles() {
           <rect x="95.5" y="287.5" className="st11" width="24" height="24" />
         </g>
       </g>
-      <g class="stars">
-        <polygon class="st12"  fill="transparent" stroke="black" stroke-width="0.5" points="173.1,80.5 167.3,77.3 161.5,80.2 162.7,73.8 158.1,69.2 164.6,68.3 167.6,62.5 170.4,68.5 176.9,69.5 172.1,74 "/>
-        <polygon class="st12"  fill="transparent" stroke="black" stroke-width="0.5" points="317.1,176.8 311.3,173.6 305.5,176.5 306.7,170.1 302.1,165.5 308.6,164.6 311.6,158.8 314.4,164.8 320.9,165.8 316.1,170.3 "/>
-        <polygon class="st12"  fill="transparent" stroke="black" stroke-width="0.5" points="220.8,320.5 215.1,317.3 209.2,320.2 210.4,313.8 205.8,309.2 212.3,308.3 215.3,302.5 218.1,308.5 224.6,309.5 219.8,314 "/>
-        <polygon class="st12"  fill="transparent" stroke="black" stroke-width="0.5" points="77.1,224 71.3,220.9 65.5,223.8 66.7,217.4 62.1,212.7 68.6,211.9 71.6,206.1 74.4,212 80.9,213.1 76.1,217.6 "/>
+      <g className="stars">
+        <polygon
+          className="st12"
+          fill="transparent"
+          stroke="black"
+          stroke-width="0.5"
+          points="173.1,80.5 167.3,77.3 161.5,80.2 162.7,73.8 158.1,69.2 164.6,68.3 167.6,62.5 170.4,68.5 176.9,69.5 172.1,74 "
+        />
+        <polygon
+          className="st12"
+          fill="transparent"
+          stroke="black"
+          stroke-width="0.5"
+          points="317.1,176.8 311.3,173.6 305.5,176.5 306.7,170.1 302.1,165.5 308.6,164.6 311.6,158.8 314.4,164.8 320.9,165.8 316.1,170.3 "
+        />
+        <polygon
+          className="st12"
+          fill="transparent"
+          stroke="black"
+          stroke-width="0.5"
+          points="220.8,320.5 215.1,317.3 209.2,320.2 210.4,313.8 205.8,309.2 212.3,308.3 215.3,302.5 218.1,308.5 224.6,309.5 219.8,314 "
+        />
+        <polygon
+          className="st12"
+          fill="transparent"
+          stroke="black"
+          stroke-width="0.5"
+          points="77.1,224 71.3,220.9 65.5,223.8 66.7,217.4 62.1,212.7 68.6,211.9 71.6,206.1 74.4,212 80.9,213.1 76.1,217.6 "
+        />
       </g>
     </>
   );
