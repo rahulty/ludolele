@@ -19,7 +19,7 @@ export function Dice() {
       <div
         unselectable="on"
         id="dice"
-        style={{ backgroundColor: player?.color }}
+        style={{ color: player?.color }}
         onClick={onDiceClick}
       >
         {dice}
