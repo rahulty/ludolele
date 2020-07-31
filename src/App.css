@@ -50,8 +50,9 @@ body {
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-  text-shadow: 1px 1px #282c34;
-  color: #b23f73;
+  text-shadow: 1px 1px white;
+  background-color: rgb(147, 147, 148);
+  position: absolute;
 
   user-select: none;
   -moz-user-select: none;
