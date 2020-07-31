@@ -30,6 +30,7 @@ const styles = {
 export function MyForm() {
   const colors = All.map((a) => a.color);
   const [players] = useGlobal((s) => s.players);
+  const [isStarted] = useGlobal((s) => s.gameState.isStarted);
   const ref = useRef();
   const [myColor, setSendMe] = useGlobal(
     (s) => s.me.color,
@@ -52,23 +53,33 @@ export function MyForm() {
     !myColor && (
       <>
         <div style={styles.overlay}></div>
-        <form onSubmit={onSelectClick} ref={ref} style={styles.wrapper}>
-          <h2>Set your Name and Color to start</h2>
-          <input type="text" id="name" placeholder="Name" />
-          <select id="color">
-            {colors.map((c) => {
-              if (players.find((p) => p.color === c)) {
-                return null;
-              }
-              return (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              );
-            })}
-          </select>
-          <input type="submit" value="Submit" />
-        </form>
+        {!isStarted ? (
+          <form onSubmit={onSelectClick} ref={ref} style={styles.wrapper}>
+            <h2>Set your Name and Color to start</h2>
+            <input type="text" id="name" placeholder="Name" />
+            <br />
+            <select id="color">
+              {colors.map((c) => {
+                if (players.find((p) => p.color === c)) {
+                  return null;
+                }
+                return (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                );
+              })}
+            </select>
+            <br />
+            <input type="submit" value="Submit" />
+          </form>
+        ) : (
+          <h1 style={styles.wrapper}>
+            This game is already started. {"\n"}
+            <a href="/">Go to home</a> and create your own link.{"\n"} Share it
+            with your friends to play.
+          </h1>
+        )}
       </>
     )
   );
