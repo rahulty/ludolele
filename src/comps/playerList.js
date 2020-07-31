@@ -13,7 +13,7 @@ export function PlayersList() {
     startGame();
   }
   return (
-    <section>
+    <section style={{ position: "absolute" }}>
       <ol>
         {players.map((p) => (
           <li>

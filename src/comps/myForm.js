@@ -14,7 +14,7 @@ const styles = {
   overlay: {
     ...commonStyles.screenCover,
     background: "black",
-    opacity: 0.5,
+    opacity: 0.7,
   },
   wrapper: {
     position: "absolute",

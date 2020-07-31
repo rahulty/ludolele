@@ -1,5 +1,10 @@
 import { sendToAny } from "./common";
-import { getMoveableGitis, changeTurn, getPitiGitis } from "./moveableGiti";
+import {
+  getMoveableGitis,
+  changeTurn,
+  getPitiGitis,
+  getGitisOnPIGroupByColor,
+} from "./moveableGiti";
 import { All } from "../constants";
 
 export const moveGiti = (store, gitiId) => {
@@ -21,8 +26,11 @@ export const moveGiti = (store, gitiId) => {
     const moveBy = moves.shift();
 
     gitis[gitiId].positionIndex = gitis[gitiId].canMoveTo;
-
-    const pitiGitis = getPitiGitis(gitis, gitis[gitiId]);
+    const gitisAtPos = getGitisOnPIGroupByColor(
+      gitis,
+      gitis[gitiId].positionIndex
+    );
+    const pitiGitis = getPitiGitis(gitis[gitiId], gitisAtPos);
     pitiGitis.forEach((giti) => {
       giti.positionIndex =
         All.find((a) => a.color === giti.color).homeIndex + Number(giti.id[2]);
@@ -35,6 +43,7 @@ export const moveGiti = (store, gitiId) => {
     ) {
       gameState.pitiCount = 1;
     }
+
     if (gitis[gitiId].moved === -1) {
       gitis[gitiId].moved = 0;
     } else {
@@ -42,6 +51,17 @@ export const moveGiti = (store, gitiId) => {
     }
     for (let gk in gitis) {
       gitis[gk] = { ...gitis[gk], canMoveTo: -1 };
+    }
+    if (Object.keys(gitisAtPos).length > 1) {
+      const gitisAtPI = [];
+      Object.values(gitisAtPos).forEach((gitiArr) =>
+        gitiArr.forEach((ga) => gitisAtPI.push(ga))
+      );
+      Object.assign(gameState.gitisAtPI, {
+        [gitis[gitiId].positionIndex]: gitisAtPI,
+      });
+    } else {
+      delete gameState.gitisAtPI[gitis[gitiId].positionIndex];
     }
   }
   let shouldChangeTurn = false;

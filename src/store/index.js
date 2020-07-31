@@ -19,6 +19,7 @@ const initialState = {
     next: "rollDice",
     moves: [],
     gitis: {},
+    gitisAtPI: {},
   },
 };
 

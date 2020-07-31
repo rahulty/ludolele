@@ -54,13 +54,12 @@ function getNewPositionIndex({ giti, move }) {
   return newPI;
 }
 
-export function getPitiGitis(gitis, movingGiti) {
+export function getPitiGitis(movingGiti, gitisAtPos) {
   let pitiGitis = [];
   const { positionIndex } = movingGiti;
   if (safeIndexes.includes(positionIndex)) {
     return pitiGitis;
   }
-  const gitisAtPos = getGitisOnPIGroupByColor(gitis, positionIndex);
   const gitisAtPosVals = Object.values(gitisAtPos);
   if (gitisAtPosVals.length > 1) {
     if (gitisAtPosVals[0].length === gitisAtPosVals[1].length) {
@@ -73,7 +72,7 @@ export function getPitiGitis(gitis, movingGiti) {
   return pitiGitis;
 }
 
-function getGitisOnPIGroupByColor(gitis, positionIndex) {
+export function getGitisOnPIGroupByColor(gitis, positionIndex) {
   const gitisAtPos = {};
   for (let k in gitis) {
     const { color, positionIndex: currGitiPI } = gitis[k];
