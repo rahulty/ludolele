@@ -85,7 +85,7 @@ export const moveGiti = (store, gitiId) => {
     }
   }
   store.setState({ gameState });
-  sendToAny(store.state, "moveGiti", gameState);
+  sendToAny(store, "moveGiti", gameState);
 };
 
 export const listenMoveGiti = (store, { payload: gameState }) => {

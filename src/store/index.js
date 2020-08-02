@@ -8,6 +8,7 @@ const rnd = getRandomInteger(1, 1000000000);
 const me = { id: rnd, color: null };
 // localStorage.setItem("me", me);
 const initialState = {
+  disconnectedPlayers: {},
   me,
   roomId: null,
   players: [me],

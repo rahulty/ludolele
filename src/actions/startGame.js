@@ -1,9 +1,12 @@
 import { sendToAny } from "./common";
 
-export const sendStartGame = ({ state, setState }) => {
-  Object.assign(state.gameState, { isStarted: true, turnId: state.me.id });
-  setState({ gameState: state.gameState });
-  sendToAny(state, "startGame", state.gameState);
+export const sendStartGame = (store) => {
+  Object.assign(store.state.gameState, {
+    isStarted: true,
+    turnId: store.state.me.id,
+  });
+  store.setState({ gameState: store.state.gameState });
+  sendToAny(store, "startGame", store.state.gameState);
 };
 
 export const listenStartGame = ({ state, setState }, gameState) => {
