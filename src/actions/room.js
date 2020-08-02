@@ -1,13 +1,14 @@
 import { sendToAny } from "./common";
 
-export const setGetSendRoomInfo = ({ state, setState }, roomId) => {
-  sendToAny({ roomId, me: state.me }, "joinRoom", null);
-  setState({ roomId });
+export const setGetSendRoomInfo = (store, roomId) => {
+  store.state.roomId = roomId;
+  sendToAny(store, "joinRoom", null);
+  store.setState({ roomId });
 };
-export const sendPlayerInfo = ({ state }) => {
-  sendToAny(state, "playerInfo", {
-    player: state.me,
-    isStarted: state.gameState.isStarted,
+export const sendPlayerInfo = (store) => {
+  sendToAny(store, "playerInfo", {
+    player: store.state.me,
+    isStarted: store.state.gameState.isStarted,
   });
 };
 export const setPlayerInfo = ({ state, setState }, { payload }) => {

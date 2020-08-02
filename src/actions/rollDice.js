@@ -32,7 +32,7 @@ export const rollDice = (store) => {
       moves: [],
     });
   }
-  sendToAny(store.state, "rollDice", gameState);
+  sendToAny(store, "rollDice", gameState);
   store.setState({ gameState });
 };
 

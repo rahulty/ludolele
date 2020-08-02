@@ -1,15 +1,19 @@
-// export const ChangeState = (store, obj) => {
-//     store.setState({obj})
-// };
 import { socket } from "../constants/socket";
 
-export function sendToAny({ roomId, me }, action, data) {
+export function sendToAny(
+  { state: { roomId, me, timer, actionsPlayers, players }, setState },
+  action,
+  data
+) {
   socket.emit("any", {
     room: "room" + roomId,
     action,
     payload: data,
     sentBy: me?.id,
   });
+}
+export function sendToMyPong(store, data) {
+  socket.emit("myPong", { room: "room" + store.state.roomId, ...data });
 }
 export function getIndex(arr, index) {
   if (index < 0) {

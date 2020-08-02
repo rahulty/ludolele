@@ -15,6 +15,7 @@ const styles = {
     ...commonStyles.screenCover,
     background: "black",
     opacity: 0.7,
+    zIndex: 1,
   },
   wrapper: {
     position: "absolute",
@@ -24,6 +25,7 @@ const styles = {
     display: "flex",
     alignItems: "center",
     flexDirection: "column",
+    zIndex: 1,
   },
 };
 
@@ -75,9 +77,10 @@ export function MyForm() {
           </form>
         ) : (
           <h1 style={styles.wrapper}>
-            This game is already started. {"\n"}
-            <a href="/">Go to home</a> and create your own link.{"\n"} Share it
-            with your friends to play.
+            This game is already started.
+            <a href="/">Go to home</a>
+            and create your own link.
+            <br /> Share it with your friends to play.
           </h1>
         )}
       </>

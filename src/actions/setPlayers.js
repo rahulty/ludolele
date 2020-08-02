@@ -7,9 +7,12 @@ export function listener({ state, setState }, { payload }) {
 
   setState({ players: state.players });
 }
-export const setSendMe = ({ state, setState }, { color, name }) => {
-  Object.assign(state.me, { color, name });
-  state.players = sortPlayerByColor([...state.players, state.me]);
-  sendToAny(state, "setPlayer", state);
-  setState({ me: state.me, players: state.players });
+export const setSendMe = (store, { color, name }) => {
+  Object.assign(store.state.me, { color, name });
+  store.state.players = sortPlayerByColor([
+    ...store.state.players,
+    store.state.me,
+  ]);
+  sendToAny(store, "setPlayer", store.state);
+  store.setState({ me: store.state.me, players: store.state.players });
 };
