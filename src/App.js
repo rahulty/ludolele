@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route, useHistory } from "react-router-dom";
+import { HashRouter, Route, useHistory } from "react-router-dom";
 import "./App.css";
 import { Board } from "./comps/board";
 import { Dice } from "./comps/dice";
@@ -14,10 +14,10 @@ import { getRandomInteger } from "./utils";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Route path="/" exact component={Home} />
         <Route path="/r/:id" exact component={Main} />
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
