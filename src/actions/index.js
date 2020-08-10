@@ -23,8 +23,18 @@ const anyListen = (store, response) => {
 
 let timer = {};
 const pongListen = (store, data) => {
-  const { players, me, disconnectedPlayers } = store.state;
+  const {
+    players,
+    me,
+    disconnectedPlayers,
+    gameState: { wonPlayerColors },
+  } = store.state;
   const { player } = data;
+  if (wonPlayerColors.includes(player.color)) {
+    clearInterval(timer[player.color]);
+    timer[player.color] = 0;
+    return;
+  }
   if (timer[player.color]) {
     clearInterval(timer[player.color]);
     timer[player.color] = 0;
