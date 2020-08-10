@@ -89,6 +89,7 @@ export const moveGiti = (store, gitiId) => {
       gameState.pitiCount = 0;
     } else {
       gameState.turnId = changeTurn(players, turnId, gameState.wonPlayerColors);
+      gameState.moves = [];
     }
   }
   store.setState({ gameState });
