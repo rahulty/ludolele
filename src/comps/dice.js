@@ -21,6 +21,7 @@ export function Dice() {
       <button
         id="dice"
         disabled={next !== "rollDice" || me.id !== turnId}
+        className={next === "rollDice" && me.id === turnId ? "blink" : ""}
         style={{ color: player?.color }}
         onClick={onDiceClick}
       >

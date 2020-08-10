@@ -29,3 +29,20 @@ a {
   font-size: 42px;
   font-weight: bold;
 }
+
+@keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.blink {
+  animation: blinker 1.3s linear infinite;
+  background-color: white;
+}
