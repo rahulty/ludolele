@@ -5,12 +5,17 @@ import { diceNumbersThatOpen } from "../constants";
 
 export const rollDice = (store) => {
   const {
-    gameState: { isStarted, turnId, next, gitis },
+    gameState: { isStarted, turnId, next, gitis, wonPlayerColors },
     gameState,
     players,
     me,
   } = store.state;
-  if (!isStarted || turnId !== me.id || next !== "rollDice") {
+  if (
+    !isStarted ||
+    turnId !== me.id ||
+    next !== "rollDice" ||
+    wonPlayerColors.length === players.length - 1
+  ) {
     return;
   }
   const dice = getRandomInteger(1, 6);
@@ -27,7 +32,7 @@ export const rollDice = (store) => {
   if (!Object.keys(movableGitis).length) {
     // change turn if no giti movable
     Object.assign(gameState, {
-      turnId: changeTurn(players, turnId),
+      turnId: changeTurn(players, turnId, gameState.wonPlayerColors),
       next: "rollDice",
       moves: [],
     });

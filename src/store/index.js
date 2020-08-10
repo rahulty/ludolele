@@ -13,6 +13,7 @@ const initialState = {
   roomId: null,
   players: [me],
   gameState: {
+    wonPlayerColors: [],
     isStarted: false,
     turnId: null,
     dice: 0,

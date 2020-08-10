@@ -35,6 +35,71 @@ function Gitis() {
   );
 }
 
+const dim = 144;
+const boxPos = [
+  { x: 11.5, y: 227.5, color: "red" },
+  { x: 11.5, y: 11.5, color: "green" },
+  { x: 227.5, y: 11.5, color: "yellow" },
+  { x: 227.5, y: 227.5, color: "blue" },
+];
+function HomeBoxes() {
+  return (
+    <>
+      {boxPos.map((v, i) => (
+        <rect
+          key={"e" + i}
+          className={`st${i + 1}`}
+          {...v}
+          width={dim}
+          height={dim}
+        />
+      ))}
+      <rect
+        id="rect4004"
+        x="11.5"
+        y="11.5"
+        className="st5"
+        width="360"
+        height="360"
+      />
+    </>
+  );
+}
+
+function Won() {
+  useGlobal((s) => s.gameState.wonPlayerColors.length);
+  const [wonPlayerColors] = useGlobal((s) => s.gameState.wonPlayerColors);
+  const [players] = useGlobal((s) => s.players);
+  if (wonPlayerColors.length > 0) {
+    return (
+      <g>
+        {wonPlayerColors.map((c) => {
+          const player = players.find((p) => p.color === c);
+          const pos = boxPos.find((p) => p.color === c);
+          return (
+            <>
+              `
+              <rect
+                {...pos}
+                width={dim}
+                height={dim}
+                fill="black"
+                fillOpacity="0.7"
+              />
+              `
+              <text x={pos.x + 10} y={pos.y + 20} fill="white">
+                {player.name} won
+              </text>
+            </>
+          );
+        })}
+      </g>
+    );
+  }
+
+  return null;
+}
+
 function Rectangles() {
   return (
     <>
@@ -66,46 +131,8 @@ function Rectangles() {
         className="st4"
         d="M347.5,227.5v-48h-120v-24l-36,36l36,36v-24h96v24H347.5"
       />
-      <rect
-        id="rect2307"
-        x="11.5"
-        y="227.5"
-        className="st1"
-        width="144"
-        height="144"
-      />
-      <rect
-        id="rect3035"
-        x="11.5"
-        y="11.5"
-        className="st2"
-        width="144"
-        height="144"
-      />
-      <rect
-        id="rect3037"
-        x="227.5"
-        y="11.5"
-        className="st3"
-        width="144"
-        height="144"
-      />
-      <rect
-        id="rect3039"
-        x="227.5"
-        y="227.5"
-        className="st4"
-        width="144"
-        height="144"
-      />
-      <rect
-        id="rect4004"
-        x="11.5"
-        y="11.5"
-        className="st5"
-        width="360"
-        height="360"
-      />
+
+      <HomeBoxes />
       <g id="squares" transform="translate(-0.5,-0.5)">
         <g id="g7984">
           <path id="path6495" className="st6" d="M156,372V228" />
@@ -256,6 +283,7 @@ function Rectangles() {
           points="77.1,224 71.3,220.9 65.5,223.8 66.7,217.4 62.1,212.7 68.6,211.9 71.6,206.1 74.4,212 80.9,213.1 76.1,217.6 "
         />
       </g>
+      <Won />
     </>
   );
 }

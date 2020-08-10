@@ -52,6 +52,9 @@ export const moveGiti = (store, gitiId) => {
     for (let gk in gitis) {
       gitis[gk] = { ...gitis[gk], canMoveTo: -1 };
     }
+    if (areAllGitiHome(gitis, gitis[gitiId].color)) {
+      gameState.wonPlayerColors.push(gitis[gitiId].color);
+    }
     if (Object.keys(gitisAtPos).length > 1) {
       const gitisAtPI = [];
       Object.values(gitisAtPos).forEach((gitiArr) =>
@@ -76,12 +79,16 @@ export const moveGiti = (store, gitiId) => {
   } else {
     shouldChangeTurn = true;
   }
+
   if (shouldChangeTurn) {
     gameState.next = "rollDice";
-    if (gameState.pitiCount > 0) {
+    if (
+      gameState.pitiCount > 0 &&
+      !gameState.wonPlayerColors.includes(gitis[gitiId].color)
+    ) {
       gameState.pitiCount = 0;
     } else {
-      gameState.turnId = changeTurn(players, turnId);
+      gameState.turnId = changeTurn(players, turnId, gameState.wonPlayerColors);
     }
   }
   store.setState({ gameState });
@@ -89,10 +96,22 @@ export const moveGiti = (store, gitiId) => {
 };
 
 export const listenMoveGiti = (store, { payload: gameState }) => {
-  // Object.assign(store.state.gameState,{})
   store.setState({ gameState });
 };
 export const setGitis = ({ state, setState }, gitis) => {
   state.gameState.gitis = { ...state.gameState.gitis, ...gitis };
   setState({ gameState: state.gameState });
 };
+
+function areAllGitiHome(gitis, color) {
+  let i = 0;
+  const allV = All.find((a) => a.color === color);
+  for (const k in gitis) {
+    if (gitis[k].color === color && allV.outIndex === gitis[k].positionIndex) {
+      if (++i === 4) {
+        return true;
+      }
+    }
+  }
+  return false;
+}

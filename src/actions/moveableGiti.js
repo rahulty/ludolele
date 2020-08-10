@@ -97,10 +97,13 @@ export function sortPlayerByColor(players) {
   }
   return newPlayers;
 }
-export function changeTurn(players, currTurnId) {
+export function changeTurn(players, currTurnId, wonPlayerColors) {
   const i = getIndex(
     players,
     players.findIndex((p) => p.id === currTurnId) + 1
   );
+  if (wonPlayerColors?.includes(players[i].color)) {
+    return changeTurn(players, players[i].id, wonPlayerColors);
+  }
   return players[i].id;
 }
