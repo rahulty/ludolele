@@ -13,27 +13,6 @@ const reConnectedListener = (store, response) => {
   store.setState({ gameState });
 };
 
-const ActionsListenersMap = {
-  joinRoom: {
-    id: "joinRoom",
-    action: setGetSendRoomInfo,
-    listener: sendPlayerInfo,
-  },
-  playerInfo: { id: "playerInfo", listener: setPlayerInfo },
-  startGame: {
-    id: "startGame",
-    action: sendStartGame,
-    listener: listenStartGame,
-  },
-  rollDice: { id: "rollDice", action: rollDice, listener: rollDiceListener },
-  setPlayer: { id: "setPlayer", listener: setPlayerListener },
-  moveGiti: { id: "moveGiti", action: moveGiti, listener: listenMoveGiti },
-  setGitis: { id: "setGitis", action: setGitis },
-  setSendMe: { id: "setSendMe", action: setSendMe },
-  reConnect: { id: "reConnect", listener: reConnectListener },
-  reConnected: { id: "reConnected", listener: reConnectedListener },
-};
-
 const anyListen = (store, response) => {
   const { action, sentBy } = response;
   if (sentBy === store.state.me?.id) {
@@ -69,6 +48,7 @@ const pongListen = (store, data) => {
     }
   });
 };
+
 const runPongInterval = (store) => {
   setInterval(() => {
     const { me } = store.state;
@@ -77,6 +57,7 @@ const runPongInterval = (store) => {
     }
   }, 5000);
 };
+
 const connected = (store) => {
   const { roomId, me } = store.state;
   if (!roomId || !me.color) {
@@ -84,9 +65,31 @@ const connected = (store) => {
   }
   sendToAny(store, "reConnect");
 };
+
 const disconnected = (store) => {
   const { me } = store.state;
   store.setState({ disconnectedPlayers: { [me.color]: me } });
+};
+
+const ActionsListenersMap = {
+  joinRoom: {
+    id: "joinRoom",
+    action: setGetSendRoomInfo,
+    listener: sendPlayerInfo,
+  },
+  playerInfo: { id: "playerInfo", listener: setPlayerInfo },
+  startGame: {
+    id: "startGame",
+    action: sendStartGame,
+    listener: listenStartGame,
+  },
+  rollDice: { id: "rollDice", action: rollDice, listener: rollDiceListener },
+  setPlayer: { id: "setPlayer", listener: setPlayerListener },
+  moveGiti: { id: "moveGiti", action: moveGiti, listener: listenMoveGiti },
+  setGitis: { id: "setGitis", action: setGitis },
+  setSendMe: { id: "setSendMe", action: setSendMe },
+  reConnect: { id: "reConnect", listener: reConnectListener },
+  reConnected: { id: "reConnected", listener: reConnectedListener },
 };
 
 export {

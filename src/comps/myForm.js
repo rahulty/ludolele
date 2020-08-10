@@ -57,8 +57,8 @@ export function MyForm() {
         <div style={styles.overlay}></div>
         {!isStarted ? (
           <form onSubmit={onSelectClick} ref={ref} style={styles.wrapper}>
-            <h2>Set your Name and Color to start</h2>
-            <input type="text" id="name" placeholder="Name" />
+            <h2>Choose your Name and Color to join the game</h2>
+            <input type="text" maxLength="7" id="name" placeholder="Name" />
             <br />
             <select id="color">
               {colors.map((c) => {

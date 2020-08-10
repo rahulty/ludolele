@@ -171,7 +171,7 @@ export const playersStates = [
 ];
 export const playersColors = ["green", "blue", "red", "yellow"];
 export const startIndexes = [0, 26, 13, 39];
-export const diceNumbersThatOpen = [1, 6];
+export const diceNumbersThatOpen = [6];
 export const safeIndexes = [
   0,
   13,

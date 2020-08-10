@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { HashRouter, Route, useHistory } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import "./App.css";
 import { Board } from "./comps/board";
 import { Dice } from "./comps/dice";
@@ -9,7 +9,8 @@ import { PlayersList } from "./comps/playerList";
 import { MyForm } from "./comps/myForm";
 import { InitializeGiti } from "./comps/initializeGiti";
 import { DisplayTurn } from "./comps/displayTurn";
-import { getRandomInteger } from "./utils";
+import { Overlay } from "./comps/overlay";
+import { Home } from "./pages/home";
 
 function App() {
   return (
@@ -50,44 +51,16 @@ function Main({ match: { params } }) {
   );
 }
 
-function Home() {
-  const history = useHistory();
-  const onClick = () => {
-    const roomId = getRandomInteger(9999, 99999999);
-    history.replace(`/r/${roomId}`);
-  };
-  return (
-    <>
-      <button onClick={onClick}>Create New Game</button>
-      <section>
-        Share the url of new created game with people you wish to play with
-      </section>
-    </>
-  );
-}
-
 function Disconnected() {
   const [disconnectedPlayers] = useGlobal((s) => s.disconnectedPlayers);
   const [disColor1] = Object.keys(disconnectedPlayers).map((col) => col);
   const p1 = disconnectedPlayers[disColor1];
 
-  return p1 ? (
-    <section
-      style={{
-        position: "absolute",
-        width: "100vw",
-        height: "100vh",
-        background: "black",
-        opacity: 0.7,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        top: 0,
-      }}
-    >
+  return p1?.color ? (
+    <Overlay>
       <h1>{p1.name + ": " + p1.color} is disconnected.</h1>
       <h1>Reconnecting...</h1>
       Or <a href="/">Go to Home</a>
-    </section>
+    </Overlay>
   ) : null;
 }
