@@ -35,7 +35,9 @@ export function PlayersList() {
       {players.length > 1 && !isStarted && (
         <>
           <h3>OR</h3>
-          <button onClick={onClickStart}>Start Game</button>
+          <button style={{ fontSize: "20px" }} onClick={onClickStart}>
+            Start Game
+          </button>
         </>
       )}
 
@@ -51,7 +53,7 @@ function Share() {
 
   return (
     <section>
-      <h2>Share:</h2>
+      <h2>Share link with your friends to play with:</h2>
       <section
         onClick={() => {
           refLink.current.select();
