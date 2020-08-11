@@ -58,9 +58,15 @@ export function MyForm() {
         {!isStarted ? (
           <form onSubmit={onSelectClick} ref={ref} style={styles.wrapper}>
             <h2>Choose your Name and Color to join the game</h2>
-            <input type="text" maxLength="7" id="name" placeholder="Name" />
+            <input
+              type="text"
+              maxLength="7"
+              id="name"
+              placeholder="Name"
+              style={{ fontSize: "20px" }}
+            />
             <br />
-            <select id="color">
+            <select id="color" style={{ fontSize: "30px" }}>
               {colors.map((c) => {
                 if (players.find((p) => p.color === c)) {
                   return null;
@@ -73,7 +79,7 @@ export function MyForm() {
               })}
             </select>
             <br />
-            <input type="submit" value="Submit" />
+            <input style={{ fontSize: "20px" }} type="submit" value="Add Me!" />
           </form>
         ) : (
           <h1 style={styles.wrapper}>

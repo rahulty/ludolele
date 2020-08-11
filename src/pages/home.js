@@ -9,11 +9,16 @@ export function Home() {
     history.replace(`/r/${roomId}`);
   };
   return (
-    <>
-      <button onClick={onClick}>Create New Game</button>
+    <section style={{ marginTop: "10%" }}>
       <section>
-        Share the url of new created game with people you wish to play with
+        Play your favorite game: Ludo with friends and family online, on browser
+        <br />
+        No app installs required. Just create a new game and share link via
+        whatsapp or other source
       </section>
+      <button style={{ fontSize: "25px", marginTop: "10px" }} onClick={onClick}>
+        Create New Game
+      </button>
       <section>
         <h1>Rules:-</h1>
         <ol>
@@ -22,6 +27,6 @@ export function Home() {
           <li>A throw of 6 gives another turn.</li>
         </ol>
       </section>
-    </>
+    </section>
   );
 }
