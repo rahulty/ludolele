@@ -1,10 +1,8 @@
 import { socket } from "../constants/socket";
 
-export function sendToAny(
-  { state: { roomId, me, timer, actionsPlayers, players }, setState },
-  action,
-  data
-) {
+export function sendToAny({ state }, action, data) {
+  const { roomId, me } = state;
+  localStorage.setItem(roomId, JSON.stringify(state));
   socket.emit("any", {
     room: "room" + roomId,
     action,

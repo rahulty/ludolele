@@ -4,10 +4,14 @@ import useGlobalHook from "use-global-hook";
 import * as actions from "../actions";
 import { getRandomInteger } from "../utils";
 const rnd = getRandomInteger(1, 1000000000);
-// const localMe = localStorage.getItem("me");
-const me = { id: rnd, color: null };
-// localStorage.setItem("me", me);
-const initialState = {
+const roomId = window.location.hash.split("/")[2];
+const local = JSON.parse(localStorage?.getItem(roomId));
+const me = {
+  id: rnd,
+  color: null,
+};
+
+const initialState = local || {
   disconnectedPlayers: {},
   me,
   roomId: null,
