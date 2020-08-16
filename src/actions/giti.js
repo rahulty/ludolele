@@ -83,13 +83,14 @@ export const moveGiti = (store, gitiId) => {
   if (shouldChangeTurn) {
     gameState.next = "rollDice";
     if (
-      gameState.pitiCount > 0 &&
-      !gameState.wonPlayerColors.includes(gitis[gitiId].color)
+      !gameState.pitiCount ||
+      gameState.wonPlayerColors.includes(gitis[gitiId].color)
     ) {
-      gameState.pitiCount = 0;
-    } else {
       gameState.turnId = changeTurn(players, turnId, gameState.wonPlayerColors);
       gameState.moves = [];
+    }
+    if (gameState.pitiCount > 0) {
+      gameState.pitiCount = 0;
     }
   }
   store.setState({ gameState });
