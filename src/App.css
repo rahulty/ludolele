@@ -28,6 +28,7 @@ a {
   top: 80vh;
   font-size: 42px;
   font-weight: bold;
+  text-shadow: -1px -1px 0 black;
 }
 
 @keyframes blinker {
@@ -41,8 +42,25 @@ a {
     opacity: 1;
   }
 }
+@keyframes expander {
+  0% {
+    fill-opacity: 1;
+    r:15px
+  }
+  50% {
+    fill-opacity: 0;
+    r:10px;
+  }
+  100% {
+    fill-opacity: 1;
+    r:15px;
+  }
+}
 
 .blink {
   animation: blinker 1.3s linear infinite;
   background-color: white;
+}
+.gitiActive{
+  animation: expander 1.3s linear infinite;
 }

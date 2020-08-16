@@ -30,11 +30,6 @@ const pongListen = (store, data) => {
     gameState: { wonPlayerColors },
   } = store.state;
   const { player } = data;
-  if (wonPlayerColors.includes(player.color)) {
-    clearInterval(timer[player.color]);
-    timer[player.color] = 0;
-    return;
-  }
   if (timer[player.color]) {
     clearInterval(timer[player.color]);
     timer[player.color] = 0;
@@ -46,7 +41,9 @@ const pongListen = (store, data) => {
     store.setState({ disconnectedPlayers: dp });
   }
   players.forEach((p) => {
-    if (!p.color || p.id === me.id) {
+    if (!p.color || p.id === me.id || wonPlayerColors.includes(p.color)) {
+      clearInterval(timer[p.color]);
+      timer[p.color] = 0;
       return;
     }
 

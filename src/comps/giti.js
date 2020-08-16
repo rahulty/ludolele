@@ -22,6 +22,7 @@ export function Giti({ id }) {
   useGlobal((s) => s.gameState.gitis[id].canMoveTo);
   const { positionIndex, canMoveTo, color } = g;
   const [gitisAtPI] = useGlobal((s) => s.gameState.gitisAtPI[positionIndex]);
+  const isActive = canMoveTo>-1;
   let [cx, cy] = places[positionIndex];
   if (gitisAtPI?.length > 1) {
     if (gitisAtPI % 2 === 0) {
@@ -40,7 +41,8 @@ export function Giti({ id }) {
       stroke="black"
       r="10px"
       fill={colorColorMap[color]}
-      strokeDasharray={canMoveTo > -1 ? 2 : 0}
+      strokeDasharray={isActive ? 2 : 0}
+      className={isActive?"gitiActive":''}
       onClick={onGitiClick}
       id={id}
     ></circle>
