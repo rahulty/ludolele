@@ -6,6 +6,7 @@ export function Dice() {
     (s) => s.gameState.dice,
     (a) => a.rollDice
   );
+  useGlobal((s) => s.gameState.moves?.length);
   const [moves] = useGlobal((s) => s.gameState.moves);
   const [turnId] = useGlobal((s) => s.gameState.turnId);
   const [players] = useGlobal((s) => s.players);
