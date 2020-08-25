@@ -22,8 +22,7 @@ export function Giti({ id }) {
   useGlobal((s) => s.gameState.gitis[id].canMoveTo);
   const { positionIndex, canMoveTo, color } = g;
   const [gitisAtPI] = useGlobal((s) => s.gameState.gitisAtPI[positionIndex]);
-  const [me] = useGlobal((s) => s.me);
-  const isActive = canMoveTo > -1 && me.color === color;
+  const isActive = canMoveTo > -1;
   let [cx, cy] = places[positionIndex];
   if (gitisAtPI?.length > 1) {
     if (gitisAtPI % 2 === 0) {
